@@ -35,7 +35,7 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 
 
 # 用例设计（待调整）
-![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BE%E5%AD%97%E4%BD%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E-%E7%94%A8%E4%BE%8B%E5%9B%BE%E5%88%9D%E7%A8%BF.png)
+![](http://7xi6qz.com1.z0.glb.clouddn.com/case1.png)
 
 # 应用领域
 - 纹身设计
@@ -60,16 +60,31 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 
 # 工程实现
 
-## Tesseract-OCR中间件实现
 
-### 1.先翻墙
 
-### 2.打开Mac OS的终端，键入
+## 后端工程实现
+
+
+后端的架构，主要分为四块：Tesseract-OCR-PHP中间件，PHP图片传输中间件，PHP云检索中间件，搜索引擎中间件。
+
+
+### 开源库：
+- 使用[Composer](http://daijiale.github.io/2016/03/08/%E3%80%90PHP%E3%80%91%20Composer%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/) 依赖；
+   -  [Silex framework ](http://silex.sensiolabs.org/doc/intro.html);
+   -  [thiagoalessio](https://github.com/thiagoalessio/tesseract-ocr-for-php);
+-  [Nutch2.3.1+Solr](http://nutch.apache.org/downloads.html);
+
+
+### Tesseract-OCR中间件实现
+
+#### 1.先翻墙
+
+#### 2.打开Mac OS的终端，键入
 
 	``` shell
 	brew install tesseract
 	```
-###  3.如果未同意Xcode协议许可，需要先键入协议许可，同意。
+#### 3.如果未同意Xcode协议许可，需要先键入协议许可，同意。
 
 	```shell
 	sudo xcodebuild -license
@@ -82,17 +97,17 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 ![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%85.png)
 
 
-### 4.继续使用Homebrew安装
+#### 4.继续使用Homebrew安装
 	``` shell
 	brew install tesseract
 	```
 
 ![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%852.png)
 
-### 5.安装成功后，进行测试，看Tesseract能否在Mac OS上正常运行,如下图所示。
+#### 5.安装成功后，进行测试，看Tesseract能否在Mac OS上正常运行,如下图所示。
 ![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%853.png)
 
-### 6.这里解释下Tesseract终端下的用法：
+#### 6.这里解释下Tesseract终端下的用法：
  	```shell
  	Usage:tesseract imagename outputbase [-l lang] [-psm pagesegmode] [configfile...]
 	pagesegmode values are:
@@ -120,7 +135,7 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
     - `-psm 7 `表示告诉tesseract `code.jpg`图片是一行文本  这个参数可以减少识别错误率.  默认为 `3`。
     - configfile 参数值为tessdata\configs 和  tessdata\tessconfigs 目录下的文件名。
     
-### 7.现在我们来使用测试一下，如下图	 
+#### 7.现在我们来使用测试一下，如下图	 
 
 **英文字体测试：**
 ![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEtess%E5%AE%89%E8%A3%854.png)
@@ -131,9 +146,9 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 
 
 
-### 8.现在我们来建立字体库以及字体数据的训练
+#### 8.现在我们来建立字体库以及字体数据的训练
 
-#### 字体库建立的官方原版说明：
+##### 字体库建立的官方原版说明：
 
 ```
 **font_properties (new in 3.01)**
@@ -184,14 +199,14 @@ cntraining lang.fontname.exp0.tr lang.fontname.exp1.tr ...
 This will output the normproto data file (the character normalization sensitivity prototypes).
 
 ```
-#### 如何进行机器学习，训练自定义新数据：
+##### 如何进行机器学习，训练自定义新数据：
 
 - [官方wiki](https://github.com/tesseract-ocr/tesseract/wiki/TrainingTesseract)
 
 
 - [中文指导](http://wangjunle23.blog.163.com/blog/static/117838171201323031458171/)
 
-#### 实践过程：
+##### 实践过程：
 
 - 首先可以从Tesseract官方Github上下载官方的语言包进行参考：[传送门](https://github.com/tesseract-ocr/tessdata)
 
@@ -199,22 +214,13 @@ This will output the normproto data file (the character normalization sensitivit
 - 
 
 
-## 后端工程实现
 
-
-后端的架构，主要分为三块：Tesseract-OCR-PHP中间件，PHP图片传输中间件，PHP云检索中间件。
-
-
-### 开源库：
-- 使用[Composer](http://daijiale.github.io/2016/03/08/%E3%80%90PHP%E3%80%91%20Composer%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/) 依赖；
--  [Silex framework ](http://silex.sensiolabs.org/doc/intro.html)；
--  [thiagoalessio](https://github.com/thiagoalessio/tesseract-ocr-for-php)。
 
 ### Tesseract-OCR-PHP中间件的实现
 
 #### 1. 配置PHP和服务器环境
 
-可以使用WAMP，也可以用PHPStorm和其内置服务器。
+可以使用WAMP/MAMP，也可以用PHPStorm和其内置服务器。
 
 #### 2.使用Composer进行PHP源工程的构建
 具体操作可以参考：[传送门](http://daijiale.github.io/2016/03/08/%E3%80%90PHP%E3%80%91%20Composer%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/)
@@ -294,10 +300,23 @@ $file->move(__DIR__.'/../uploads', $filename);
 
 
 
+
+### 搜索引擎的实现
+
+
+
+#### Nutch和Solar在Mac下的部署与开发
+![](http://7xi6qz.com1.z0.glb.clouddn.com/nutch%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-22%2011.06.32.png)
+
+
+
 ## 前端工程实现
 
 -views
 	-
+
+
+
 
 
 ## 移动端工程实现
