@@ -32,14 +32,14 @@ OCR（Optical Character Recognition 光学字符识别）技术，是指电�
 Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时已经成为OCR业内最准确的三款识别引擎之一。然而，HP不久便决定放弃OCR业务，Tesseract也从此尘封。 
 数年以后，HP意识到，与其将Tesseract束之高阁，不如贡献给开源软件业，让其重焕新生－－2005年，Tesseract由美国内华达州信息技术研究所获得，并求诸于Google对Tesseract进行改进、消除Bug、优化工作。 Tesseract目前已作为开源项目发布在Google Project，其最新版本3.0已经支持中文OCR。
 
-在这样成熟的技术背景下，我很想利用这项OCR技术，再结合当下热门的移动互联网的开发技术和信息检索技术，实现一个能将图片中文字成功识别的移动Web搜索引擎，旨在为更多朋友能更加快捷、准确地从图片中获取想要的信息。。
+在这样成熟的技术背景下，我很想利用这项OCR技术，再结合当下热门的移动互联网的开发技术和信息检索技术，实现一个能将图片中文字成功识别的移动Web搜索引擎，旨在为更多朋友能更加快捷、准确地从图片中获取想要的信息。
 
 # 三、需求分析
 
 
 
 
-# 四、用例设计（待调整）
+# 四、用例设计
 ![](http://7xi6qz.com1.z0.glb.clouddn.com/case1.png)
 
 # 五、应用领域
@@ -52,10 +52,10 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 
 
 
-# 六、架构设计（待调整）
+# 六、架构设计
 
 
-![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BE%E5%AD%97%E4%BD%93%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.png)
+![](http://7xi6qz.com1.z0.glb.clouddn.com/ocr-search%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
 
 
 # 七、技术点分析
@@ -432,7 +432,7 @@ http://localhost:8983/solr
 
 
 
-#### 利用Nutch爬虫进行数据抓取
+#### 利用Nutch爬虫进行数据抓取、Solr进行数据检索
 
 #####  一站式抓取
 
@@ -566,7 +566,114 @@ bin/nutch clean –D solr.server.url=http://192.168.1.11:8983/solr data/crawldb
 
 ##### 抓取结果分析
 
+###### readdb
 
+用于读取或者导出Nutch的抓取数据库，通常用于查看数据库的状态信息，查看readdb的用法：
+```bin/nutch readdb
+Usage: CrawlDbReader <crawldb> (-stats | -dump <out_dir> | -topN <nnnn> <out_dir> [<min>] | -url <url>)
+<crawldb>directory name where crawldb is located
+-stats [-sort] print overall statistics to System.out
+[-sort]list status sorted by host
+-dump <out_dir> [-format normal|csv|crawldb]dump the whole db to a text file in <out_dir>
+[-format csv]dump in Csv format
+[-format normal]dump in standard format (default option)
+[-format crawldb]dump as CrawlDB
+[-regex <expr>]filter records with expression
+[-retry <num>]minimum retry count
+[-status <status>]filter records by CrawlDatum status
+-url <url>print information on <url> to System.out
+-topN <nnnn> <out_dir> [<min>]dump top <nnnn> urls sorted by score to <out_dir>
+[<min>]skip records with scores below this value.
+This can significantly improve performance.
+```
+这里的crawldb即为保存URL信息的数据库，-stats表示查看统计状态信息，-dump表示导出统计信息，url表示查看指定URL的信息，查看数据库状态信息：
+
+```bin/nutch readdb TestCrawl/crawldb -stats
+```
+
+得到的统计结果如下：
+
+```
+MacBook-Pro:local root# bin/nutch readdb TestCrawl/crawldb -stats
+CrawlDb statistics start: TestCrawl/crawldb
+Statistics for CrawlDb: TestCrawl/crawldb
+TOTAL urls:	290
+retry 0:	290
+min score:	0.0
+avg score:	0.017355172
+max score:	1.929
+status 1 (db_unfetched):	270
+status 2 (db_fetched):	17
+status 3 (db_gone):	2
+status 4 (db_redir_temp):	1
+CrawlDb statistics: done
+```
+
+TOTAL urls表示URL总数，retry表示重试次数，mins score为最低分数，max score为最高分数，status 1 (db_unfetched)为未抓取的数目，status 2 (db_fetched)为已抓取的数目。
+
+###### readlinkdb
+
+
+readlinkdb用于导出全部URL和锚文本，查看用法：
+
+```
+bin/nutch readlinkdb
+Usage: LinkDbReader <linkdb> (-dump <out_dir> [-regex <regex>]) | -url <url>
+-dump <out_dir>dump whole link db to a text file in <out_dir>
+-regex <regex>restrict to url's matching expression
+-url <url>print information about <url> to System.out
+```
+这里的dump和url参数与readdb命令同理，导出数据：
+```
+bin/nutch readlinkdb data/linkdb -dump linkdb_dump
+```
+将数据导入到linkdb_dump这个文件夹中，查看导出的数据信息：
+```
+cat linkdb_dump /*
+```
+可以看到，导出的信息类似以下格式：
+```http://archive.apache.org/dist/nutch/	Inlinks:
+fromUrl: http://www.sanesee.com/article/step-by-step-nutch-introduction anchor: http://archive.apache.org/dist/nutch/
+```
+即记录了来源URL。
+
+###### readseg
+
+readseg用于查看或导出segment里面的数据，查看使用方法：
+```
+bin/nutch readseg
+Usage: SegmentReader (-dump ... | -list ... | -get ...) [general options]
+* General options:
+-nocontentignore content directory
+-nofetchignore crawl_fetch directory
+-nogenerateignore crawl_generate directory
+-noparseignore crawl_parse directory
+-noparsedataignore parse_data directory
+-noparsetextignore parse_text directory
+* SegmentReader -dump <segment_dir> <output> [general options]
+  Dumps content of a <segment_dir> as a text file to <output>.
+<segment_dir>name of the segment directory.
+<output>name of the (non-existent) output directory.
+* SegmentReader -list (<segment_dir1> ... | -dir <segments>) [general options]
+  List a synopsis of segments in specified directories, or all segments in
+  a directory <segments>, and print it on System.out
+<segment_dir1> ...list of segment directories to process
+-dir <segments>directory that contains multiple segments
+* SegmentReader -get <segment_dir> <keyValue> [general options]
+  Get a specified record from a segment, and print it on System.out.
+<segment_dir>name of the segment directory.
+<keyValue>value of the key (url).
+Note: put double-quotes around strings with spaces.
+```
+导出segment数据：
+```
+bin/nutch readseg -dump data/segments/20150715124521 segment_dump
+```
+将数据导入到segment_dump这个文件夹中，查看导出的数据信息：
+```
+cat segment_dump /*
+```
+可以看到，里面包含非常具体的网页信息。
 
 
 ### 第三个模块：PHP消息中间件模块
@@ -652,7 +759,7 @@ $filename = sprintf('%d.%s', time(), $info->getExtension());
 $file->move(__DIR__.'/../uploads', $filename);
 ```
 
-
+#### Solr-PHP中间件的实现
 
 
 
@@ -697,4 +804,5 @@ $file->move(__DIR__.'/../uploads', $filename);
 - [Github_Tesseract-OCR_For_PHP](https://github.com/thiagoalessio/tesseract-ocr-for-php)
 - [Nutch1.10入门教程](http://www.sanesee.com/search/article-all-2)
 - [Solr入门](http://blog.csdn.net/liuzhenwen/article/details/4060922)
+- [Solr官网](http://wiki.apache.org/solr/FrontPage)
 - [Solr PHP]()
