@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>小枫图搜</title>
+	<link href='http://fonts.useso.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../views/css/default.css">
+	<link rel="stylesheet" href="../views/css/font-awesome.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../views/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="../views/css/site.css" rel="stylesheet" type="text/css" />
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+	<!-- start preloader -->
+	<div class="preloader">
+		<div class="sk-search"> <i class="fa fa-search"></i>  正在图搜中</div>
+		<div class="sk-spinner sk-spinner-three-bounce">
+			<div class="sk-bounce1"></div>
+			<div class="sk-bounce2"></div>
+			<div class="sk-bounce3"></div>
+		</div>
+		
+	</div>
+	<!-- end preloader -->
+
+	<div class="htmleaf-container">
+
+		<div class="container mp30">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-list-alt"></span><b>图像识别结果页</b></div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									{#编写将text变量值post到/search接口的按钮以及编辑按钮#}
+									<div id="result_title">
+										<p style="text-align: center;font-size: 1.0em;color:#74777b;">
+											<span style="font-size: 1.2em;color:#E02323;">图片识别结果如下:</span><br>
+											( eg: 如果您觉得识别结果有些许的误差,您可以点击<span style="color: #2fa0ec;">编辑纠正</span>按钮,对误差内容进行修正后再进行搜索 )
+										</p>
+									</div>
+
+									<div id="result_content">
+										<p style="text-align: center;font-size: 3.0em">{{ text }}</p>
+									</div>
+
+									<div id="result_button">
+										<div class="col-md-6"><button class=" btn btn-info " style="float:right;">编辑纠正</button></div>
+										<form action="/ocr_search/public/search.php" method="post" enctype="multipart/form-data">
+											<input type="hidden" name="ocr_text" value="{{ text }}" />
+											<div class="col-md-6 "><input type="submit" class="btn btn-danger" value="开始搜索" /></div>
+										</form>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+
+						</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	<script src="http://libs.useso.com/js/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+	<script src="../views/js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+	<script src="../views/js/wow.min.js"></script>
+	<script src="../views/js/custom.js"></script>
+	<script type="text/javascript">
+    $(function () {
+        $(".demo1").bootstrapNews({
+            newsPerPage: 5,
+            autoplay: true,
+			pauseOnHover:true,
+            direction: 'up',
+            newsTickerInterval: 4000,
+            onToDo: function () {
+                //console.log(this);
+            }
+        });
+		
+		
+    });
+</script>
+</body>
+</html>

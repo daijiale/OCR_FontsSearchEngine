@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>小枫图搜</title>
+	<link href='http://fonts.useso.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../views/css/default.css">
+	<link rel="stylesheet" href="../views/css/font-awesome.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../views/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="../views/css/site.css" rel="stylesheet" type="text/css" />
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+	<!-- start preloader -->
+	<div class="preloader">
+		<div class="sk-search"> <i class="fa fa-search"></i>  正在图搜中</div>
+		<div class="sk-spinner sk-spinner-three-bounce">
+			<div class="sk-bounce1"></div>
+			<div class="sk-bounce2"></div>
+			<div class="sk-bounce3"></div>
+		</div>
+		
+	</div>
+	<!-- end preloader -->
+
+	<div class="htmleaf-container">
+
+		<div class="container mp30">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-list-alt"></span><b>搜索结果页</b></div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<ul class="demo1">
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url0 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title0 }}</a><br>
+														<br><p>{{ content0 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time0 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost0}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url1 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title1 }}</a><br>
+														<br><p>{{ content1 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time1 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost1}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url2 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title2 }}</a><br>
+														<br><p>{{ content2 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time2 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost2}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url3 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title3 }}</a><br>
+														<br><p>{{ content3 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time3 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost3}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url4 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title4 }}</a><br>
+														<br><p>{{ content4 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time4 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost4}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url5 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title1 }}</a><br>
+														<br><p>{{ content1 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time1 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost5}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url6 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title6 }}</a><br>
+														<br><p>{{ content6 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time6 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost6}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url7 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title7 }}</a><br>
+														<br><p>{{ content7 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time7 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost7}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url8 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title8 }}</a><br>
+														<br><p>{{ content8 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time8 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost8}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+
+										<li class="news-item">
+											<table cellpadding="4">
+												<tr>
+													<td><a href="{{ url9 }}" target="_blank" style="font-size: 1.5em"><span style="color: #E02323">{{ keyword }} </span>: {{ title9 }}</a><br>
+														<br><p>{{ content9 }}</p>
+														<br>
+														<p style="font-size: 0.5em;font-weight:400;color:#74777b;"><span style="padding:5px;background-color: #c12e2a;color: #FFFFFF ">收录时间 : {{ index_time9 }}</span> | <span style="padding:5px;background-color: #2aabd2;color: #FFFFFF ">排序权重:{{ boost9}}</span></p>
+													</td>
+
+												</tr>
+											</table>
+										</li>
+
+
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+
+						</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	<script src="http://libs.useso.com/js/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+	<script src="../views/js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+	<script src="../views/js/wow.min.js"></script>
+	<script src="../views/js/custom.js"></script>
+	<script type="text/javascript">
+    $(function () {
+        $(".demo1").bootstrapNews({
+            newsPerPage: 5,
+            autoplay: true,
+			pauseOnHover:true,
+            direction: 'up',
+            newsTickerInterval: 4000,
+            onToDo: function () {
+                //console.log(this);
+            }
+        });
+		
+		
+    });
+</script>
+</body>
+</html>
