@@ -1,4 +1,5 @@
 # 【OCR/机器学习/搜索引擎】基于 Tesseract的图文识别搜索引擎
+
 # 一、前言：
 
 这是一篇图像识别OCR技术、机器学习、以及简易搜索引擎构建相关的技术Blog，是自己在做毕设的同时，每天不断记录研究成果和心得的地方。
@@ -21,7 +22,7 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 
 
 # 四、用例设计
-![](http://7xi6qz.com1.z0.glb.clouddn.com/case1.png)
+![](http://img.daijiale.cn/case1.png)
 
 # 五、应用领域
 
@@ -36,7 +37,7 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 # 六、架构设计
 
 
-![](http://7xi6qz.com1.z0.glb.clouddn.com/ocr-search%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+![](http://img.daijiale.cn/ocr-search%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
 
 
 # 七、技术点分析
@@ -93,7 +94,7 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 	agree
 	```
 	
-![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%85.png)
+![](http://img.daijiale.cn/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%85.png)
 
 
 ##### 4.继续使用Homebrew安装
@@ -101,10 +102,10 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
 	brew install tesseract
 	```
 
-![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%852.png)
+![](http://img.daijiale.cn/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%852.png)
 
 ##### 5.安装成功后，进行测试，看Tesseract能否在Mac OS上正常运行,如下图所示。
-![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%853.png)
+![](http://img.daijiale.cn/%E6%AF%95%E8%AE%BEtesseract%E5%AE%89%E8%A3%853.png)
 
 ##### 6.这里解释下Tesseract终端下的用法：
  	```shell
@@ -136,12 +137,12 @@ Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时�
     
 ##### 7.现在我们来使用测试一下，如下图	 
 
-**英文字体测试：**
-![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEtess%E5%AE%89%E8%A3%854.png)
+** 英文字体测试：**
+![](http://img.daijiale.cn/%E6%AF%95%E8%AE%BEtess%E5%AE%89%E8%A3%854.png)
 
 
-**中文字体测试：**
-![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEocr-php-test.png)
+** 中文字体测试：**
+![](http://img.daijiale.cn/%E6%AF%95%E8%AE%BEocr-php-test.png)
 
 
 
@@ -279,12 +280,13 @@ ant -version
 ```
 出现 Apache Ant(TM) version 1.9.6 compiled on ... 这个显示则证明安装成功！
 
-![](http://7xi6qz.com1.z0.glb.clouddn.com/ocrsearchAntForMac.png)
+![](http://img.daijiale.cn/ocrsearchAntForMac.png)
 
 
 
 
 ###### Nutch安装部署
+
 - 介绍：目前Nutch分为两个大版本1.x和2.x，Apache分别对这两个大版本进行独立开发和维护。其中，1.x和2.x最大的不同点在于，1.x是基于hadoop的HDFS文件系统的，而2.x将数据的存储层抽象出来，可以将数据保存在Hbase、MySQL等数据库中。还有一点很重要，Nutch在1.2以及之前，都是作为一个完整的搜索引擎进行发布的，而从1.3开始，Nutch本身就主要只有爬虫功能，若需要对抓取的数据建立索引并进行搜索，还要用到Solr全文检索服务器。由于Nutch和Solr都是基于Lucene开发的，因此Nutch抓取的数据可以轻松地在Solr中建立索引。Nutch官网可以下载到编译好的1.x包，但2.x只提供源码，需要自己编译。Nutch使用Ant来构建的，若自己编译的话，需要安装Ant来编译源码。对于如何选择Nutch的版本，主要考虑一下以下问题：如果只需要抓取少量的网站，并对其建立索引，使用1.x和2.x都可以，甚至都可以使用单机的，而不需分布式。但如果要抓取大量网站，甚至是全网爬行，那么最好选择1.x，并且采用分布式，因为1.x是基于hadoop文件系统的，而hadoop又是专门为处理大数据而生。若抓取大量网站时采用2.x，可能会遇到一些性能问题，要是使用MySQL来存储数据，网页数据上百亿时，性能将是一个噩梦。Nutch1.x不同的版本变化也比较大，执行命令发生过较大改变，因此，建议初学者下载本教程对应的版本1.10，等到熟悉使用Nutch的时候，那些改变对你而言就没太大影响了。Nutch作为当今最流行的开源爬虫之一，已被企业广泛使用。Nutch的插件机制使得开发者可以灵活地定制网页抓取策略。Nutch有着悠久的历史，当今大名鼎鼎的Hadoop就是由Nutch发展而来。Nutch不仅可以运行在单机模式下，还可以运行在分布式模式下。Nutch仅支持在Linux环境下工作，因此，在类Linux的OS X下可以直接使用。
 
 - 版本选用：apache-nutch-1.10-src.zip
@@ -324,6 +326,7 @@ vi conf/nutch-default.xml
 ##### 启动服务
 
 ###### Ant 编译 Nutch源码
+
 切换到Nutch主目录下执行：
 
 ```
@@ -353,14 +356,14 @@ Total time: 1 minute 7 seconds
 
 如下图所示：
 
-![](http://7xi6qz.com1.z0.glb.clouddn.com/ocrsearchnutch%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E6%88%90%E5%8A%9F.png)
+![](http://img.daijiale.cn/ocrsearchnutch%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E6%88%90%E5%8A%9F.png)
 
 Nutch编译成功之后，会在主目录下生成一个runtime文件夹。其中包含deploy和local两个子文件夹。deploy用于分布式抓取，而local用于本地单机抓取。本节内容先讲解使用本地单机抓取，分布式抓取放到后续教程。
 
 进入local文件夹，再进入bin文件夹。这里包含两个脚本文件，一个是nutch，另一个是crawl。其中，nutch包含了所需的全部命令，而crawl主要用于一站式抓取。
 
 如下图所示：
-![](http://7xi6qz.com1.z0.glb.clouddn.com/ocrsearchnutch_runtime.png)
+![](http://img.daijiale.cn/ocrsearchnutch_runtime.png)
 
 
 
@@ -427,7 +430,7 @@ bin/crawl
 bin/nutch
 ```
 输入以上两个命令显示了它们各自的使用方法，后面会详细讲解一部分常用的命令，如下图所示：
-![](http://7xi6qz.com1.z0.glb.clouddn.com/ocrsearchcrawl%E5%92%8Cnutch%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3.png)
+![](http://img.daijiale.cn/ocrsearchcrawl%E5%92%8Cnutch%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3.png)
 
 
 查看crawl的使用方法：
@@ -460,7 +463,7 @@ bin/crawl -i -D solr.server.url=http://localhost:8983/solr/ urls/ TestCrawl/  2
 
 抓取成功后如下图所示：
 
-![](http://7xi6qz.com1.z0.glb.clouddn.com/ocrsearchnutch%E4%B8%80%E7%AB%99%E5%BC%8F%E6%8A%93%E5%8F%96%E6%88%90%E5%8A%9F.png)
+![](http://img.daijiale.cn/ocrsearchnutch%E4%B8%80%E7%AB%99%E5%BC%8F%E6%8A%93%E5%8F%96%E6%88%90%E5%8A%9F.png)
 
 ##### 分布式抓取
 有的时候，一站式抓取并不能很好的满足我们的需求，因此，这里给大家介绍一下分布式抓取的方法：分布式抓取的实际抓取过程包含多个命令的，为了简化操作，crawl把多个命令组合到一起提供给用户使用的。如果要深入学习Nutch爬虫技术，仅仅会使用crawl命令是不够的，还需要对抓取的过程非常熟悉，这里需要用到上一教程中seed.txt所保存的URL信息，还需删除data/crawldb，data/linkdb和data/segments文件夹下的内容，因为我们要分步重新抓取数据。
@@ -500,9 +503,10 @@ bin/nutch generate data/crawldb data/segments
 generate命令执行之后，会生成一个待抓取页面的列表，抓取列表存放在一个新建的segment路径中。segment的文件夹根据创建的时间进行命名（本教程文件夹名为201507151245）。
 
 generate还有很多可选参数，读者可以通过以下命令自行查看（其它命令的查看方法也一样）：
+
 ```
 bin/nutch generate
-`
+```
 
 ###### 启动抓取
 根据generate生成的抓取列表抓取网页：
@@ -521,14 +525,17 @@ bin/nutch updated data/crawldb –dir data/segments/201507151245
 ```
 
 现在，数据库里包含所有初始页面更新后的入口，以及从初始集合中新发现的页面的新入口。
+
 ###### 反转链接
 在建立索引之前，我们首先对所有的链接进行反转，这样我们才可以对页面的来源锚文本进行索引。
+
 ```
 bin/nutch invertlinks data/linkdb –dir data/segments/201507151245
 ```
 
 
 ###### 将抓取到的数据加入Solr索引
+
 启动Solr服务，现在，我们对抓取到的资源建立索引：
 ```
 bin/nutch index data/crawldb -linkdb data/linkdb -params solr.server.url=http://localhost:8983/solr -dir data/segments/201507151245
@@ -670,6 +677,7 @@ Note: put double-quotes around strings with spaces.
 可以使用WAMP/MAMP，也可以用PHPStorm和其内置服务器。
 
 ##### 2.使用Composer进行PHP源工程的构建
+
 具体操作可以参考：[传送门](http://daijiale.github.io/2016/03/08/%E3%80%90PHP%E3%80%91%20Composer%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/)
 
 打开终端，切换到你的工程路径下：
@@ -680,7 +688,7 @@ composer require silex/silex twig/twig thiagoalessio/tesseract_ocr:dev-master
 
 因为使用了PHP的微型框架`Silex Framework`，我们需要自己建立PHP源工程项目MVC（public，uploads，views）结构，如图所示：
 
-![](http://7xi6qz.com1.z0.glb.clouddn.com/%E6%AF%95%E8%AE%BEocr-php.png)
+![](http://img.daijiale.cn/%E6%AF%95%E8%AE%BEocr-php.png)
 
 
 - **public:**存放PHP脚本
@@ -691,7 +699,7 @@ composer require silex/silex twig/twig thiagoalessio/tesseract_ocr:dev-master
 
 ##### 3.用Sliex库建立PHP消息中间件
 
-######启动初始化 
+###### 启动初始化 
  - public/index.php
 
 ```php
@@ -759,7 +767,7 @@ $file->move(__DIR__.'/../uploads', $filename);
 
 ### 交互设计
 
-**交互流程：**
+** 交互流程：**
 
 1）用户输入主页网站URL，进入首页，享受服务，了解服务详情。
 
@@ -773,6 +781,7 @@ $file->move(__DIR__.'/../uploads', $filename);
 5）用户确认识别内容后，可以点击搜索，进入搜索引擎模块，获取检索结果。
 
 ### 视觉设计
+
 视觉设计在产品组成中占了极为重要的成分，它直接影响了使用者对于该产品最初的观感、使用时的体验以及最后留下的印象等等。甚至在许多时候，产品的成败与否，往往就取决于成功的视觉设计经验上。
 针对这个毕设，我并没有把它当成一个可以应付了事的系统，而是当成一个自己的产品去悉心创作，因此，我很注重这个系统的前端视觉设计，和用户体验。
 全站选色，我选用了大众比较认可的百度搜索引擎主题色，红色和蓝色，首页背景采用红蓝过渡色，并调整了透明度，通过CSS代码画出，节约加载耗时的同时也给予用户一个良好的视觉冲击，同时对首页的文字说明，增加了底部阴影，并采用微软细黑字体，让视觉感觉更有层次感，图片搜索框以及预览框，也是加重了阴影，对预览字段的重要程度进行了不同的颜色和色度区分。让用户视觉上清爽，简洁，能最快找到自己视觉所需信息，之后会经过一个简单的loading页面，这里做了一个等待的圆圈渐变放大缩小动效，让用户对等待时间不感觉到烦躁，同时告诉用户，系统后台正在进行计算运行，当跳转到识别结果页面时候，依然按照文案重要程度，对所有文字颜色和字号进行了视觉调整，让用户不用花费太多时间，筛选重要信息，两个按钮的排班和选色也更倾向于增加点击欲望和点击感，提示用户可以进行下一步操作。最后的检索结果页面，我将它设计成了类似一本书目的篇章，每个列表根据搜索结果网页标题、网页摘要、收录时间、权重进行了不同的排班和字号颜色调整，增加视觉冲击感以及辨识度。让用户觉得和大众搜索引擎有一些共同点，但其中又透露出一些自己的个性，给用户熟悉又新奇的体验感，而且还保留了清爽无广告和多余干扰信息的特点。并且，所有视觉设计结合了当下的响应式设计理念，同时在PC端和移动端下都具有良好的用户体验和视觉效果。
@@ -780,7 +789,7 @@ $file->move(__DIR__.'/../uploads', $filename);
 
 ### 模板编写
 
-**采用Twig进行模板编写：**
+** 采用Twig进行模板编写：**
 
 - views
 	- index.twig
@@ -793,7 +802,7 @@ $file->move(__DIR__.'/../uploads', $filename);
 	- favicon.ico
 
 前端体验如下图所示：
-![](http://7xi6qz.com1.z0.glb.clouddn.com/ocrsearch%E5%B0%8F%E6%9E%AB%E5%9B%BE%E6%90%9C_%E8%A7%86%E8%A7%89%E8%AE%BE%E8%AE%A1.jpg)
+![](http://img.daijiale.cn/ocrsearch%E5%B0%8F%E6%9E%AB%E5%9B%BE%E6%90%9C_%E8%A7%86%E8%A7%89%E8%AE%BE%E8%AE%A1.jpg)
 
 
 ## 移动端工程实现、测试
@@ -801,19 +810,24 @@ $file->move(__DIR__.'/../uploads', $filename);
 主要基于Bootstrap3.4，可以用XDK/phoneGap打包编译成对应NA App，发布到应用市场。
 移动端体验如下图所示：
 
-![](http://7xi6qz.com1.z0.glb.clouddn.com/ocrsearchIMG_3244.JPG)
+![](http://img.daijiale.cn/ocrsearchIMG_3244.JPG)
 
 
 
 # 心得体会
+
 感谢大学四年所有的任课老师和所有帮助过我的同学们，是他们教会了我专业知识，通过近四年的学习和科研工作，不仅使我的知识结构和科研能力上了一个新的台阶，更重要的是让我融入了社会，给了我充分的实习经历，让我在大学本科就体验到了很多研究生都无法体验的互联网公司工作经历。弹指一挥间，大学四年已经接近了尾声。当自己怀着忐忑不安的心情完成这篇毕业论文的时候，自己也从当年一个懵懂孩子变成了一个成熟青年，还是那句话——只有汗水不会欺骗你，最后，感谢电子科技大学，感谢大学所遇见的每一个人，也感谢自己四年的努力。
 
 # 项目开源地址：
+
 [https://github.com/daijiale/OCR_FontsSearchEngine](https://github.com/daijiale/OCR_FontsSearchEngine).
 
 # 项目视频演示地址：
+
 [http://v.youku.com/v_show/id_XMTYzNDY2NDYxNg==.html](http://v.youku.com/v_show/id_XMTYzNDY2NDYxNg==.html).
+
 # 参考文献
+
 - [ tesseract OCR训练新数据的详细步骤-附大量训练数据](http://blog.csdn.net/tuling_research/article/details/41091163)
 - [ tesseract OCR的多语言，多字体字符识别](http://blog.csdn.net/viewcode/article/details/7917320)
 - [Tesseract:安装与命令行使用](http://linusp.github.io/2015/04/17/tesseract-install-usage.html)
