@@ -802,6 +802,7 @@ $file->move(__DIR__.'/../uploads', $filename);
 	- favicon.ico
 
 前端体验如下图所示：
+
 ![](http://img.daijiale.cn/ocrsearch%E5%B0%8F%E6%9E%AB%E5%9B%BE%E6%90%9C_%E8%A7%86%E8%A7%89%E8%AE%BE%E8%AE%A1.jpg)
 
 
